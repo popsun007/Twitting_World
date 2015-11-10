@@ -1,5 +1,5 @@
 
-var topo = require('goble.json')
+
 var width = 960,
     height = 960,
     speed = -1e-2,
@@ -24,8 +24,8 @@ var path = d3.geo.path()
     .projection(projection)
     .context(context);
 
-// d3.json("/mbostock/raw/4090846/world-110m.json", function(error, topo) {
-//   if (error) throw error;
+d3.json("/globe_data", function(error, topo) {
+  if (error) throw error;
 
   var land = topojson.feature(topo, topo.objects.land),
       grid = graticule();
@@ -66,6 +66,6 @@ var path = d3.geo.path()
     context.strokeStyle = "#000";
     context.stroke();
   });
-// });
+});
 
 d3.select(self.frameElement).style("height", height + "px");
