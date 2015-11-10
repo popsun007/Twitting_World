@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "body-parser": "^1.14.1",
+    "bower": "^1.6.5",
+    "d3": "^3.5.8",
+    "express": "^4.13.3",
+    "mongoose": "^4.2.5"
+  }
+}
