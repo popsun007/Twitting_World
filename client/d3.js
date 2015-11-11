@@ -1,5 +1,3 @@
-
-
 var width = 960,
     height = 960,
     speed = -1e-2,
