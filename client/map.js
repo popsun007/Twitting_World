@@ -9,7 +9,7 @@ var projection = d3.geo.miller()
 
 var path = d3.geo.path()
     .projection(projection);
-
+var tweetsWrapper = d3.select('.tweets');
 var graticule = d3.geo.graticule();
 var svg = d3.select("body").append("svg")
     .attr("width", width)
@@ -33,6 +33,26 @@ d3.json("/globe_data", function(error, world) {
       .attr("class", "boundary")
       .attr("d", path);
 
+function renderTweets(data)
+{
+  var tweets = tweetsWrapper.selectAll('div.tweet').data(data);
+
+  tweets.exit().remove();
+
+  var divWrapper = tweets.enter().insert("div", ":first-child");
+  divWrapper.classed('tweet', true);
+
+  divWrapper.append('div')
+    .classed('user', true)
+    .html(function(t){return '@'+t.screen_name + ' - ' + t.created_at.toLocaleString();;});
+  divWrapper.append('div')
+    .classed('text', true)
+    .html(function(t){return t.text;});
+  divWrapper.append('a')
+    .attr('href',function(t){return 'https://twitter.com/'+t.screen_name+'/status/'+t.id_str;})
+    .html(function(t){return 'https://twitter.com/'+t.screen_name+'/status/'+t.id_str;});
+}
+
 // var tip = d3.tip().attr('class', 'd3-tip tweet').offset([-10, 0]).html(generateTipHtml);
   socket.on('stream', function(tweets){
     var tweet_geos = [];
@@ -42,28 +62,24 @@ d3.json("/globe_data", function(error, world) {
       }
     }
     console.log(tweet_geos);
-        svg.selectAll("circle")
-        .data(tweet_geos).enter()
-        .append("circle")
-        .attr("cx", function(d) {
-               return projection(d)[0];
-            })
-        .attr("cy", function(d) {
-               return projection(d)[1];
-            })
-        .attr("r", "5px")
-        .attr("fill", "red")
-        .transition()
-        .delay(100000)
-        .remove();;
-      $('svg circle').tipsy({ 
-        gravity: 'w', 
-        html: false, 
-        title: function() {
-          return $(this).append('Hi there! My color is haha'); 
-        }
-      });
-    
+    // draw points:
+    svg.selectAll("circle")
+    .data(tweet_geos).enter()
+    .append("circle")
+    .attr("cx", function(d) {
+           return projection(d)[0];
+        })
+    .attr("cy", function(d) {
+           return projection(d)[1];
+        })
+    .attr("r", "5px")
+    .attr("fill", "rgb(255,140,0)")
+    .transition()
+    .delay(300000)
+    .remove();
+
+    // append tweets:
+    renderTweets(tweets);
   });
 });
 

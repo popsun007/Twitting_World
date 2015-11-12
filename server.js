@@ -5,13 +5,7 @@ var path = require('path');
 // instantiate the app
 var app = express();
 
-// io.on("connection", function () { 
-
-// });
-// set up a static file server that points to the "client" directory
 app.use(express.static(path.join(__dirname, './client')));
-
-// require('./server/config/mongoose.js');
 
 var usersFilePath = path.join(__dirname, './server/world.json');
 app.get('/globe_data', function (req, res){
@@ -47,19 +41,11 @@ var twit = new twitter({
 		    	text: tweet.text
 	    	}
 
-	    	// tweetsCol.insert(data, {safe: true}, function(er,rs) {});
 	    	tweets.push(data);
 	    	io.sockets.emit('stream', tweets);
-			// tweets.push(data)
 			console.log(data);
 	  	}
 	});
-	// first report in 25 seconds
-	// setTimeout(function(){
-	// 	console.log("Numbers of tweets: " + tweets.length + "." + "\n");
-	// 	// stream.destroy();
-	// 	// process.exit(0);
-	// }, 25000);
 });
 
 
