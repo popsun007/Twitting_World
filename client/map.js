@@ -11,7 +11,6 @@ var path = d3.geo.path()
     .projection(projection);
 
 var graticule = d3.geo.graticule();
-
 var svg = d3.select("body").append("svg")
     .attr("width", width)
     .attr("height", height);
@@ -34,22 +33,36 @@ d3.json("/globe_data", function(error, world) {
       .attr("class", "boundary")
       .attr("d", path);
 
+// var tip = d3.tip().attr('class', 'd3-tip tweet').offset([-10, 0]).html(generateTipHtml);
   socket.on('stream', function(tweets){
-
-    console.log("ahha");
-    console.log(tweets[0].geo);
-      // add circles to svg
-  svg.selectAll("circle")
-      .data([tweets[0].geo]).enter()
-      .append("circle")
-      .attr("cx", function(d) {
-             return projection(d)[0];
-          })
-      .attr("cy", function(d) {
-             return projection(d)[1];
-          })
-      .attr("r", "5px")
-      .attr("fill", "red");
+    var tweet_geos = [];
+    for(var i = 0; i < tweets.length; i++){
+      if (tweets[i].geo){
+        tweet_geos.push(tweets[i].geo);
+      }
+    }
+    console.log(tweet_geos);
+        svg.selectAll("circle")
+        .data(tweet_geos).enter()
+        .append("circle")
+        .attr("cx", function(d) {
+               return projection(d)[0];
+            })
+        .attr("cy", function(d) {
+               return projection(d)[1];
+            })
+        .attr("r", "5px")
+        .attr("fill", "red")
+        .transition()
+        .delay(100000)
+        .remove();;
+      $('svg circle').tipsy({ 
+        gravity: 'w', 
+        html: false, 
+        title: function() {
+          return $(this).append('Hi there! My color is haha'); 
+        }
+      });
     
   });
 });

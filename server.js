@@ -48,8 +48,8 @@ var twit = new twitter({
 	    	}
 
 	    	// tweetsCol.insert(data, {safe: true}, function(er,rs) {});
-
-	    	io.sockets.emit('stream',[data]);
+	    	tweets.push(data);
+	    	io.sockets.emit('stream', tweets);
 			// tweets.push(data)
 			console.log(data);
 	  	}
