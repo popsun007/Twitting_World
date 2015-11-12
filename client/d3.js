@@ -25,12 +25,14 @@ var path = d3.geo.path()
 d3.json("/globe_data", function(error, topo) {
   if (error) throw error;
 
+
+
   var land = topojson.feature(topo, topo.objects.land),
       grid = graticule();
 
   d3.timer(function() {
-    context.clearRect(0, 0, width, height);
 
+    context.clearRect(0, 0, width, height);
     projection.rotate([speed * (Date.now() - start), -15]).clipAngle(90);
 
     context.beginPath();
@@ -62,8 +64,30 @@ d3.json("/globe_data", function(error, topo) {
     context.fill();
     context.lineWidth = .5;
     context.strokeStyle = "#000";
+        // // points
+    aa = [124, 335];
+    bb = [-122.389809, 37.72728];
+    console.log("----")
+    console.log(projection(aa),projection(bb));
+
+    // add circles to canvas
+    canvas.selectAll("circle")
+        .data([aa,bb]).enter()
+        .append("circle")
+        .attr("cx", function(d) {
+               return projection(d)[0];
+            })
+        .attr("cy", function(d) {
+               return projection(d)[1];
+            })
+        .attr("r", "19px")
+        .attr("fill", "red");
     context.stroke();
+
+
+
   });
+
 });
 
 d3.select(self.frameElement).style("height", height + "px");
