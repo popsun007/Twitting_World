@@ -24,8 +24,8 @@ var io = require('socket.io').listen(server);
 var	twitter = require('twitter');
 var tweets = [];
 var twit = new twitter({
-	consumer_key: 'y8C2BhgEdruvHSTnCdsgr0J9C',
-	consumer_secret: 'i3lj8DvKHPJJezojeP70VQ7nSb6a8MEtJuu7HECsTgJBYFf0ud',
+	consumer_key: 'y8C2BhgAbcdeHSTnCdsgr0J9C',
+	consumer_secret: 'i3lj8DvKHPJAbcePe70VQ7nSb6a8MEtJuu7HECsTgJBYFf0ud',
 	access_token_key: '195242020-kA89Awhara7WeGaIWTqSaw9BUcrUInDMgomCneHa',
 	access_token_secret: 'Y1ydjfrPs5EvS48PiYdSOctUlyLRMO6y2hokPsJAxcvwz'
 })
