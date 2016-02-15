@@ -24,10 +24,10 @@ var io = require('socket.io').listen(server);
 var	twitter = require('twitter');
 var tweets = [];
 var twit = new twitter({
-	consumer_key: 'y8C2BhgAbcdeHSTnCdsgr0J9C',
-	consumer_secret: 'i3lj8DvKHPJAbcePe70VQ7nSb6a8MEtJuu7HECsTgJBYFf0ud',
-	access_token_key: '195242020-kA89Awhara7WeGaIWTqSaw9BUcrUInDMgomCneHa',
-	access_token_secret: 'Y1ydjfrPs5EvS48PiYdSOctUlyLRMO6y2hokPsJAxcvwz'
+	consumer_key: 'YOUR_CONSUMER_KEY',
+	consumer_secret: 'YOUR_CONSUMER_SECRET',
+	access_token_key: 'YOUR_ACCESS_TOKEN',
+	access_token_secret: 'YOUR_ACCESS_TOKEN_SECRET'
 })
 .stream('statuses/sample', function(stream) {
 	stream.on('data', function(tweet){
