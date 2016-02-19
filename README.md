@@ -1,5 +1,6 @@
 # Twitting_World
 Live on: http://twitting-world.heroku.com
+<br>
 A map that allows users to visualize real time tweets from all over the world on a map
 
 ![alt tag](https://s3.amazonaws.com/poly-screenshots.angel.co/Project/0f/163992/3ac8ab2d7b498df9b3b6122bd82c3c50-original.png)
